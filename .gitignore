@@ -1,0 +1,14 @@
+# Icarus Verilog
+*.vvp
+*.out
+
+# GTKWave
+*.vcd
+
+# Simulation/build files
+sim/
+build/
+
+# Editor files
+.vscode/
+*.swp
