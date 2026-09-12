@@ -1,14 +1,19 @@
-# Icarus Verilog
+# Icarus Verilog compiled simulation files
 *.vvp
 *.out
+*.sim
 
-# GTKWave
+# VCD waveform files
 *.vcd
 
-# Simulation/build files
-sim/
-build/
+# GTKWave files
+*.gtkw
 
-# Editor files
-.vscode/
-*.swp
+# Common simulation executables
+simulation
+*_sim
+*_tb
+
+# Temporary/log files
+*.log
+*.tmp
