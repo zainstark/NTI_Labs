@@ -11,6 +11,7 @@
 
 # Common simulation executables
 simulation
+sim
 *_sim
 *_tb
 
