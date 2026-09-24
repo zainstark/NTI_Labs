@@ -1,4 +1,4 @@
-module sequence_detector_moore #(
+module sequence_detector_mealy #(
     parameter OVERLAP = 1'b0
 )(
     input clk,
@@ -14,7 +14,6 @@ module sequence_detector_moore #(
     parameter S3 = 3'b011;
     parameter S4 = 3'b100;
     parameter S5 = 3'b101;
-    parameter S6 = 3'b110;
 
     reg [2:0] current_state;
     reg [2:0] next_state;
@@ -74,17 +73,10 @@ module sequence_detector_moore #(
 
             // Matched: 11010
             S5: begin
-                if (din)
-                    next_state = S6;
-                else
-                    next_state = S0;
-            end
+                if (din) begin
+                    // 11010 + 1 = 110101
 
-            // Matched: 110101
-            S6: begin
-                if (OVERLAP) begin
-                    // Longest prefix/suffix is "1"
-                    if (din)
+                    if (OVERLAP)
                         next_state = S1;
                     else
                         next_state = S0;
@@ -101,13 +93,15 @@ module sequence_detector_moore #(
 
     end
 
-    // Moore output
-    // Output depends only on current state
+    // Mealy output
+    // Output depends on current state AND input
     always @(*) begin
-        if (current_state == S6)
+
+        if ((current_state == S5) && din)
             detected = 1'b1;
         else
             detected = 1'b0;
+
     end
 
 endmodule
